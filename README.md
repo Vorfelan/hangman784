@@ -12,7 +12,9 @@ To be updated...
 To be updated...
 
 ## File structure
-To be updated...
+Hangman
+- milestone_2.py
+- milestone_3.py
 
 ## Licence
 Please follow the MIT licence.
