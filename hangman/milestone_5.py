@@ -38,12 +38,13 @@ class Hangman():
         guess = guess.lower()
         if guess in self.word:
             print(f"Good guess! {guess} is in the word.")
-
-            for letter in self.word:
-                if letter == guess:
-                    self.word_guessed[letter] = guess
-
             self.num_letters -= 1
+
+            for idx, letter in enumerate(self.word):
+                if letter == guess:
+                    self.word_guessed[idx] = guess
+            
+            print(f"Word: {self.word_guessed}")
 
         else:
             self.num_lives -= 1
@@ -66,9 +67,31 @@ class Hangman():
             else:
                 self.check_guess(guess)
                 self.list_of_guesses.append(guess)
+                break
 
+def play_game(word_list):
+    '''
+    This function initiates a game of Hangman.
 
+    Args:
+        word_list (list): a list of words to be included in the game.
+    '''
+    num_lives = 5
+    game = Hangman(word_list, num_lives)
+
+    while True:
+        if game.num_lives == 0:
+            print("You lost!")
+            break
+        if game.num_letters > 0:
+            game.ask_for_input()
+            continue
+        if game.num_lives != 0 and game.num_letters == 0:
+            print("Congratulations. You won the game!")
+            break
+
+# List of words for the game
 word_list = ['banana','apple','bluberry','watermelon','kiwi']
 
-hangman = Hangman(word_list)
-hangman.ask_for_input()
+# Call function to initiate a game.
+play_game(word_list)
